@@ -5,11 +5,11 @@ import cmath
 from io import BytesIO
 
 # Configuração da página
-st.set_page_config(page_title="Analisador de Circuito RLC - TCC", layout="wide")
-st.title("📊 Analisador de Circuito RLC Paralelo")
+st.set_page_config(page_title="Analisador de Circuito RLC", layout="wide")
+st.title("📊 Analisador de Circuito Elétrico")
 st.markdown("""
-**Aplicativo web para análise de circuitos RLC paralelos**  
-*Desenvolvido para Trabalho de Conclusão de Curso*
+**Aplicativo web para análise de circuitos RLC MISTO**  
+*Engenharia Elétrica - Circuitos Elétricos II*
 """)
 
 # Funções auxiliares
@@ -51,22 +51,22 @@ with st.sidebar:
     col1, col2 = st.columns(2)
     with col1:
         C = st.number_input("Capacitância (µF)", min_value=0.01, value=1.0) * 1e-6
-        R1 = st.number_input("Resistência R1 (Ω)", min_value=1.0, value=100.0)
-        R2 = st.number_input("Resistência R2 (Ω)", min_value=1.0, value=200.0)
+        R1 = st.number_input("Resistência R1 (Ω)", min_value=1.0, value=1000.0)
+        R2 = st.number_input("Resistência R2 (Ω)", min_value=1.0, value=2000.0)
     with col2:
         L = st.number_input("Indutância (µH)", min_value=1.0, value=1000.0) * 1e-6
-        R3 = st.number_input("Resistência R3 (Ω)", min_value=1.0, value=300.0)
+        R3 = st.number_input("Resistência R3 (Ω)", min_value=1.0, value=3000.0)
     
     st.subheader("Tensão de Referência")
     v_format = st.radio("Formato", ["Polar", "Retangular"], index=0)
     
     if v_format == "Polar":
-        v_mag = st.number_input("Magnitude (V)", min_value=1.0, value=10.0)
-        v_phase = st.number_input("Fase (graus)", value=0.0)
+        v_mag = st.number_input("Tensão (V)", min_value=1.0, value=10.0)
+        v_phase = st.number_input("Fase (θ)", value=0.0)
         V_ref = cmath.rect(v_mag, np.radians(v_phase))
     else:
         v_real = st.number_input("Parte real (V)", value=10.0)
-        v_imag = st.number_input("Parte imaginária (V)", value=0.0)
+        v_imag = st.number_input("Parte imaginária (j)", value=0.0)
         V_ref = complex(v_real, v_imag)
 
 # Cálculos
@@ -124,4 +124,4 @@ plot_fasores([I_total, I_ramo1, I_ramo2],
 
 # Rodapé
 st.markdown("---")
-st.caption("Desenvolvido para TCC - Engenharia Elétrica | © 2023")
+st.caption("João Guilherme | Flávio H. | Mikhaelly M. | Gustavo H. \\\n Circuitos II - Engenharia Elétrica | 2025-1")
