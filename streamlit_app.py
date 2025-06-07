@@ -39,9 +39,9 @@ with header:
     title_col, img_col = st.columns([4, 1])
     
     with title_col:
-        st.title("Analisador de Circuito RLC MISTO")
+        st.title("🔍 Analisador de Circuito RLC MISTO")
         st.markdown("""
-        Aplicativo web para análise de circuitos RLC MISTO  
+        **Aplicativo web para análise de circuitos RLC MISTO**  
         *Desenvolvido para Trabalho Acadêmico*
         """)
     
@@ -68,29 +68,6 @@ try:
     circuit_image = Image.open(requests.get(img_url, stream=True).raw)
 except:
     circuit_image = None
-
-# Container principal do cabeçalho
-header_container = st.container()
-with header_container:
-    # Layout com colunas (5:1 ratio)
-    col_title, col_img = st.columns([5, 1])
-    
-    with col_title:
-        st.markdown('<div class="title-container">', unsafe_allow_html=True)
-        st.title("🔍 Analisador de Circuito RLC MISTO")
-        st.markdown("""
-        **Aplicativo web para análise de circuitos RLC MISTO**  
-        *Desenvolvido para Trabalho Acadêmico*
-        """)
-        st.markdown('</div>', unsafe_allow_html=True)
-    
-    with col_img:
-        st.markdown('<div class="image-container">', unsafe_allow_html=True)
-        if circuit_image:
-            st.image(circuit_image, width=180, use_column_width=False)
-        else:
-            st.image(img_url, width=180, use_column_width=False)
-        st.markdown('</div>', unsafe_allow_html=True)
 
 # Funções auxiliares
 def format_fasor(z):
