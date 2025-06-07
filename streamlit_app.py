@@ -6,55 +6,49 @@ from io import BytesIO
 import requests
 from PIL import Image
 
-# Configuração da página DEVE ser o primeiro comando
+# Configuração da página (DEVE ser o primeiro comando)
 st.set_page_config(page_title="Analisador de Circuito RLC MISTO", layout="wide")
 
-# CSS para alinhamento perfeito
+# CSS customizado para alinhamento perfeito
 st.markdown("""
 <style>
-    .header-row {
+    .custom-header {
         display: flex;
-        align-items: center;
         justify-content: space-between;
+        align-items: center;
         margin-bottom: 2rem;
     }
-    .title-container {
-        flex-grow: 1;
-        padding-right: 2rem;
+    .header-text {
+        flex: 1;
     }
-    .image-container {
-        flex-shrink: 0;
+    .header-image {
+        margin-left: 20px;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Cabeçalho com imagem à direita
+# Container do cabeçalho
 with st.container():
-    st.markdown('<div class="header-row">', unsafe_allow_html=True)
+    col1, col2 = st.columns([4, 1])  # Proporção 4:1 (texto:imagem)
     
-    # Coluna do título
-    st.markdown('<div class="title-container">', unsafe_allow_html=True)
-    st.title("# Analisador de Circuito RLC MISTO")
-    st.markdown("""
-    Aplicativo web para análise de circuitos RLC MISTO  
-    *Desenvolvido para Trabalho Acadêmico*
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
+    with col1:
+        st.title("# Analisador de Circuito RLC MISTO")
+        st.markdown("""
+        Aplicativo web para análise de circuitos RLC MISTO  
+        *Desenvolvido para Trabalho Acadêmico*
+        """)
     
-    # Coluna da imagem
-    st.markdown('<div class="image-container">', unsafe_allow_html=True)
-    img_url = "https://i.imgur.com/Jh8awva.png"  # Substitua pelo seu link
-    try:
-        st.image(img_url, width=180, use_container_width=False)  # Corrigido o parâmetro
-    except:
-        st.warning("Imagem não carregada")
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+    with col2:
+        img_url = "https://i.imgur.com/Jh8awva.png"  # Seu link de imagem
+        try:
+            # CORREÇÃO DO PARÂMETRO (use_container_width correto)
+            st.image(img_url, width=150, use_container_width=False)
+        except:
+            st.warning("Imagem não carregada")
 
 # Seção de resultados
+st.markdown("---")
 st.header("## Resultados da Análise")
-
 # Carregar imagem do circuito
 img_url = "https://i.imgur.com/Jh8awva.png"  # Substitua pelo seu link direto
 try:
