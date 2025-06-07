@@ -6,6 +6,9 @@ from io import BytesIO
 import requests
 from PIL import Image
 
+# Configuração da página
+st.set_page_config(page_title="Analisador de Circuito RLC - MISTO", layout="wide")
+
 # Configuração de estilo CSS para alinhamento perfeito
 st.markdown("""
 <style>
@@ -25,9 +28,6 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-
-# Configuração da página
-st.set_page_config(page_title="Analisador de Circuito RLC - MISTO", layout="wide")
 
 # Carregar imagem do circuito
 img_url = "https://i.imgur.com/Jh8awva.png"  # Substitua pelo seu link direto
