@@ -6,28 +6,54 @@ from io import BytesIO
 import requests
 from PIL import Image
 
-# Configuração da página
-st.set_page_config(page_title="Analisador de Circuito RLC - MISTO", layout="wide")
+# Configuração da página DEVE ser o primeiro comando
+st.set_page_config(page_title="Analisador de Circuito RLC MISTO", layout="wide")
 
-# Configuração de estilo CSS para alinhamento perfeito
+# CSS para alinhamento perfeito
 st.markdown("""
 <style>
-    [data-testid="stHorizontalBlock"] {
+    .header-row {
+        display: flex;
         align-items: center;
-        gap: 1rem;
-    }
-    .header-container {
+        justify-content: space-between;
         margin-bottom: 2rem;
     }
     .title-container {
-        padding-right: 1rem;
+        flex-grow: 1;
+        padding-right: 2rem;
     }
     .image-container {
-        display: flex;
-        justify-content: flex-end;
+        flex-shrink: 0;
     }
 </style>
 """, unsafe_allow_html=True)
+
+# Cabeçalho com imagem à direita
+with st.container():
+    st.markdown('<div class="header-row">', unsafe_allow_html=True)
+    
+    # Coluna do título
+    st.markdown('<div class="title-container">', unsafe_allow_html=True)
+    st.title("# Analisador de Circuito RLC MISTO")
+    st.markdown("""
+    Aplicativo web para análise de circuitos RLC MISTO  
+    *Desenvolvido para Trabalho Acadêmico*
+    """)
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Coluna da imagem
+    st.markdown('<div class="image-container">', unsafe_allow_html=True)
+    img_url = "https://i.imgur.com/Jh8awva.png"  # Substitua pelo seu link
+    try:
+        st.image(img_url, width=180, use_container_width=False)  # Corrigido o parâmetro
+    except:
+        st.warning("Imagem não carregada")
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# Seção de resultados
+st.header("## Resultados da Análise")
 
 # Carregar imagem do circuito
 img_url = "https://i.imgur.com/Jh8awva.png"  # Substitua pelo seu link direto
