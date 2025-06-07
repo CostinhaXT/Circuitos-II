@@ -7,7 +7,7 @@ import requests
 from PIL import Image
 
 # Configuração da página
-st.set_page_config(page_title="Analisador de Circuito RLC - TCC", layout="wide")
+st.set_page_config(page_title="Analisador de Circuito RLC - MISTO", layout="wide")
 
 # Carregar imagem do circuito (com tratamento de erro invisível)
 img_url = "https://i.imgur.com/Jh8awva.png"  # 👈 Substitua pelo seu link!
@@ -17,7 +17,7 @@ except:
     circuit_image = None  # Falha silenciosa
 
 # Layout do cabeçalho (imagem AO LADO do título)
-col1, col2 = st.columns([1, 4])  # Proporção 1:4 (imagem menor)
+col1, col2 = st.columns([4, 1])  # Proporção 1:4 (imagem menor)
 with col1:
     if circuit_image:
         st.image(circuit_image, width=150)  # Largura reduzida para alinhar melhor
@@ -25,10 +25,10 @@ with col1:
         st.image(img_url, width=150)  # Fallback direto do link
 
 with col2:
-    st.title("🔍 Analisador de Circuito RLC Paralelo")
+    st.title("🔍 Analisador de Circuito RLC MISTO")
     st.markdown("""
-    **Aplicativo web para análise de circuitos RLC paralelos**  
-    *Desenvolvido para Trabalho de Conclusão de Curso*
+    **Aplicativo web para análise de circuitos RLC MISTO**  
+    *Desenvolvido para Trabalho Acadêmico*
     """)
 # Funções auxiliares
 def format_fasor(z):
