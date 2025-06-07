@@ -6,49 +6,62 @@ from io import BytesIO
 import requests
 from PIL import Image
 
-# Configuração da página (DEVE ser o primeiro comando)
-st.set_page_config(page_title="Analisador de Circuito RLC MISTO", layout="wide")
+# 1. CONFIGURAÇÃO DA PÁGINA (OBRIGATÓRIO SER PRIMEIRO)
+st.set_page_config(
+    page_title="Analisador de Circuito RLC MISTO",
+    page_icon="⚡",
+    layout="wide"
+)
 
-# CSS customizado para alinhamento perfeito
+# 2. CSS PARA LAYOUT PERFEITO
 st.markdown("""
 <style>
-    .custom-header {
+    .main-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 2rem;
     }
-    .header-text {
+    .title-section {
         flex: 1;
+        min-width: 0;
     }
-    .header-image {
-        margin-left: 20px;
+    .image-section {
+        margin-left: 2rem;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Container do cabeçalho
-with st.container():
-    col1, col2 = st.columns([4, 1])  # Proporção 4:1 (texto:imagem)
+# 3. CABEÇALHO PRINCIPAL (TÍTULO + IMAGEM)
+header = st.container()
+with header:
+    # Divisão em colunas
+    title_col, img_col = st.columns([4, 1])
     
-    with col1:
-        st.title("# Analisador de Circuito RLC MISTO")
+    with title_col:
+        st.title("Analisador de Circuito RLC MISTO")
         st.markdown("""
         Aplicativo web para análise de circuitos RLC MISTO  
         *Desenvolvido para Trabalho Acadêmico*
         """)
     
-    with col2:
-        img_url = "https://i.imgur.com/Jh8awva.png"  # Seu link de imagem
+    with img_col:
         try:
-            # CORREÇÃO DO PARÂMETRO (use_container_width correto)
-            st.image(img_url, width=150, use_container_width=False)
-        except:
-            st.warning("Imagem não carregada")
+            # CARREGAMENTO CORRETO DA IMAGEM (SEM ERROS)
+            img_url = "https://i.imgur.com/Jh8awva.png"  # INSIRA SEU LINK AQUI
+            st.image(
+                img_url,
+                width=160,  # Largura ajustável
+                use_container_width=False,  # PARÂMETRO CORRETO
+                caption="Circuito RLC"
+            )
+        except Exception as e:
+            st.error(f"Erro ao carregar imagem: {e}")
 
-# Seção de resultados
+# 4. SEÇÃO DE RESULTADOS (SEM REPETIÇÕES)
 st.markdown("---")
-st.header("## Resultados da Análise")
+st.header("Resultados da Análise")
+
 # Carregar imagem do circuito
 img_url = "https://i.imgur.com/Jh8awva.png"  # Substitua pelo seu link direto
 try:
