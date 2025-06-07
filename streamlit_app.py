@@ -3,15 +3,33 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cmath
 from io import BytesIO
+import requests
+from PIL import Image
 
 # Configuração da página
-st.set_page_config(page_title="Analisador de Circuito RLC", layout="wide")
-st.title("📊 Analisador de Circuito Elétrico")
-st.markdown("""
-**Aplicativo web para análise de circuitos RLC MISTO**  
-*Engenharia Elétrica - Circuitos Elétricos II*
-""")
+st.set_page_config(page_title="Analisador de Circuito RLC - TCC", layout="wide")
 
+# Carregar imagem do circuito (com tratamento de erro invisível)
+img_url = "https://i.imgur.com/Jh8awva.png"  # 👈 Substitua pelo seu link!
+try:
+    circuit_image = Image.open(requests.get(img_url, stream=True).raw)
+except:
+    circuit_image = None  # Falha silenciosa
+
+# Layout do cabeçalho (imagem AO LADO do título)
+col1, col2 = st.columns([1, 4])  # Proporção 1:4 (imagem menor)
+with col1:
+    if circuit_image:
+        st.image(circuit_image, width=150)  # Largura reduzida para alinhar melhor
+    else:
+        st.image(img_url, width=150)  # Fallback direto do link
+
+with col2:
+    st.title("🔍 Analisador de Circuito RLC Paralelo")
+    st.markdown("""
+    **Aplicativo web para análise de circuitos RLC paralelos**  
+    *Desenvolvido para Trabalho de Conclusão de Curso*
+    """)
 # Funções auxiliares
 def format_fasor(z):
     return f"{abs(z):.2f} ∠ {np.degrees(cmath.phase(z)):.2f}°"
