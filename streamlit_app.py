@@ -6,30 +6,59 @@ from io import BytesIO
 import requests
 from PIL import Image
 
+# Configuração de estilo CSS para alinhamento perfeito
+st.markdown("""
+<style>
+    [data-testid="stHorizontalBlock"] {
+        align-items: center;
+        gap: 1rem;
+    }
+    .header-container {
+        margin-bottom: 2rem;
+    }
+    .title-container {
+        padding-right: 1rem;
+    }
+    .image-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # Configuração da página
 st.set_page_config(page_title="Analisador de Circuito RLC - MISTO", layout="wide")
 
-# Carregar imagem do circuito (com tratamento de erro invisível)
-img_url = "https://i.imgur.com/Jh8awva.png"  # 👈 Substitua pelo seu link!
+# Carregar imagem do circuito
+img_url = "https://i.imgur.com/Jh8awva.png"  # Substitua pelo seu link direto
 try:
     circuit_image = Image.open(requests.get(img_url, stream=True).raw)
 except:
-    circuit_image = None  # Falha silenciosa
+    circuit_image = None
 
-# Layout do cabeçalho (imagem AO LADO do título)
-col1, col2 = st.columns([4, 1])  # Proporção 1:4 (imagem menor)
-with col1:
-    if circuit_image:
-        st.image(circuit_image, width=150)  # Largura reduzida para alinhar melhor
-    else:
-        st.image(img_url, width=150)  # Fallback direto do link
+# Container principal do cabeçalho
+header_container = st.container()
+with header_container:
+    # Layout com colunas (5:1 ratio)
+    col_title, col_img = st.columns([5, 1])
+    
+    with col_title:
+        st.markdown('<div class="title-container">', unsafe_allow_html=True)
+        st.title("🔍 Analisador de Circuito RLC MISTO")
+        st.markdown("""
+        **Aplicativo web para análise de circuitos RLC MISTO**  
+        *Desenvolvido para Trabalho Acadêmico*
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    with col_img:
+        st.markdown('<div class="image-container">', unsafe_allow_html=True)
+        if circuit_image:
+            st.image(circuit_image, width=180, use_column_width=False)
+        else:
+            st.image(img_url, width=180, use_column_width=False)
+        st.markdown('</div>', unsafe_allow_html=True)
 
-with col2:
-    st.title("🔍 Analisador de Circuito RLC MISTO")
-    st.markdown("""
-    **Aplicativo web para análise de circuitos RLC MISTO**  
-    *Desenvolvido para Trabalho Acadêmico*
-    """)
 # Funções auxiliares
 def format_fasor(z):
     return f"{abs(z):.2f} ∠ {np.degrees(cmath.phase(z)):.2f}°"
