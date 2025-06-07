@@ -51,7 +51,7 @@ with header:
             img_url = "https://i.imgur.com/Jh8awva.png"  # INSIRA SEU LINK AQUI
             st.image(
                 img_url,
-                width=160,  # Largura ajustável
+                width=180,  # Largura ajustável
                 use_container_width=False,  # PARÂMETRO CORRETO
                 caption="Circuito RLC"
             )
